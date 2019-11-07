@@ -1,25 +1,29 @@
 <?php
 use miloschuman\highcharts\Highcharts;
+
+$this->title = 'Dashboard|Jenis Kelas KA';
+
+foreach($data as $value){
+    $a[] = array('type' => 'column', 'name' => $value['nama'], 'data' => array((int)$value['jml']));
+}
 ?>
 
 <div class="content">
     <?php
-     
+
         echo Highcharts::widget([
             'options' => [
-            'title' => ['text' => 'Fruit Consumption'],
+            'title' => ['text' => 'Berdasarkan Jenis Atau Kelas'],
             'xAxis' => [
-                'categories' => ['Apples', 'Bananas', 'Oranges']
+                'categories' => ['Kereta']
             ],
             'yAxis' => [
-                'title' => ['text' => 'Fruit eaten']
+                'title' => ['text' => 'Keterlambatan (Menit)']
             ],
-            'series' => [
-                ['name' => 'Jane', 'data' => [1, 0, 4]],
-                ['name' => 'John', 'data' => [5, 7, 3]]
-            ]
+            'series' => $a
             ]
         ]);    
     
     ?>
+
 </div>

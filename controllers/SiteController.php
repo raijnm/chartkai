@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\VKeterlambatan;
 
 class SiteController extends Controller
 {
@@ -127,6 +128,49 @@ class SiteController extends Controller
     }
 
     public function actionJeniskelaska(){
-        return $this->render('jeniskelaska');
+
+        $model = new VKeterlambatan();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            // valid data received in $model
+            $rows = (new \yii\db\Query())
+            ->select(['nama', 'id_kelas','jml'])
+            ->from('v_keterlambatan')
+            ->filterWhere(['nama' => $model->nama,'id_kelas' => $model->id_kelas])
+            ->groupBy(['nama','id_kelas','jml'])
+            ->all();
+
+            // do something meaningful here about $model ...
+
+            return $this->render('jeniskelaska', ['model' => $model,'data' => $rows]);
+        } else {
+            // either the page is initially displayed or there is some validation error
+            return $this->render('jeniskelasentry', ['model' => $model]);
+        }
+        
+        // $data = Yii::$app->db->createCommand(
+        //     'SELECT nama, SUM(jml) AS jml 
+        //     FROM v_keterlambatan 
+        //     GROUP BY nama
+        //     LIMIT 10')
+        //     ->queryAll();
+
+        // return $this->render('jeniskelaska',['data' => $data]);
+    }
+
+    public function actionAda(){
+        $model = new VKeterlambatan();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            // valid data received in $model
+
+            // do something meaningful here about $model ...
+
+            return $this->render('adsa', ['model' => $model]);
+        } else {
+            // either the page is initially displayed or there is some validation error
+            return $this->render('jeniskelasentry', ['model' => $model]);
+        }
+
     }
 }
