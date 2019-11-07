@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 if (class_exists('ramosisw\CImaterial\web\MaterialAsset')) {
@@ -39,7 +40,7 @@ if (class_exists('ramosisw\CImaterial\web\MaterialAsset')) {
                     -->
 
             <div class="logo" data-image="https://kai.id/static/konten/logokai_main.png">
-                <a href="" class="simple-text">
+                <a href="<?php echo Url::to(['site/index']); ?>" class="simple-text">
                     Kereta Api Indonesia
                 </a>
             </div>
@@ -47,13 +48,13 @@ if (class_exists('ramosisw\CImaterial\web\MaterialAsset')) {
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li>
-                        <a href="#">
+                        <a href="<?php echo Url::to(['site/index']); ?>">
                             <i class="material-icons">dashboard</i>
                             <p>Dashboard</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="<?php echo Url::to(['site/jeniskelaska']); ?>">
                             <i class="material-icons">bar_chart</i>
                             <p>Jenis & Kelas KA</p>
                         </a>
