@@ -134,10 +134,10 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             // valid data received in $model
             $rows = (new \yii\db\Query())
-            ->select(['nama', 'id_kelas','jml'])
+            ->select(['nama', 'id_kelas','jml','no_ka'])
             ->from('v_keterlambatan')
             ->filterWhere(['nama' => $model->nama,'id_kelas' => $model->id_kelas])
-            ->groupBy(['nama','id_kelas','jml'])
+            ->groupBy(['nama','id_kelas','jml','no_ka'])
             ->all();
 
             // do something meaningful here about $model ...
@@ -148,14 +148,7 @@ class SiteController extends Controller
             return $this->render('jeniskelasentry', ['model' => $model]);
         }
         
-        // $data = Yii::$app->db->createCommand(
-        //     'SELECT nama, SUM(jml) AS jml 
-        //     FROM v_keterlambatan 
-        //     GROUP BY nama
-        //     LIMIT 10')
-        //     ->queryAll();
 
-        // return $this->render('jeniskelaska',['data' => $data]);
     }
 
     public function actionAda(){

@@ -4,7 +4,7 @@ use miloschuman\highcharts\Highcharts;
 $this->title = 'Dashboard|Jenis Kelas KA';
 
 foreach($data as $value){
-    $a[] = array('type' => 'column', 'name' => $value['nama'], 'data' => array((int)$value['jml']));
+    $a[] = array('type' => 'column', 'name' => $value['nama'].'('.$value['no_ka'].')', 'data' => array((int)$value['jml']));
 }
 ?>
 
