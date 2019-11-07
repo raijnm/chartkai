@@ -68,7 +68,9 @@ if (class_exists('ramosisw\CImaterial\web\MaterialAsset')) {
                 </ul>
             </div>
         </div>
-        <?= $content ?>
+        <div class="main-panel">
+            <?= $content ?>
+        </div>
     </div>
 <?php $this->endBody() ?>
 </body>
