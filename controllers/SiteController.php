@@ -137,6 +137,7 @@ class SiteController extends Controller
             ->select(['nama', 'id_kelas','jml','no_ka'])
             ->from('v_keterlambatan')
             ->filterWhere(['nama' => $model->nama,'id_kelas' => $model->id_kelas])
+            ->andFilterCompare('jml', '>0')
             ->groupBy(['nama','id_kelas','jml','no_ka'])
             ->all();
 
