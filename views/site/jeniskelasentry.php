@@ -9,9 +9,9 @@ use yii\widgets\ActiveForm;
             
                 <?php $form = ActiveForm::begin(); ?>
 
-                    <?= $form->field($model, 'nama') ?>
+                    <?= $form->field($model, 'nama')->textInput(['id' => 'namai', 'onchange' => 'funama()']) ?>
 
-                    <?= $form->field($model, 'id_kelas') ?>
+                    <?= $form->field($model, 'id_kelas')->textInput(['id' => 'kelasi', 'onchange' => 'fukelas()']) ?>
 
                     <div class="form-group">
                         <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
@@ -21,3 +21,11 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 </div>
+<script>
+    function funama(){
+        document.getElementById('kelasi').type = 'hidden';
+    }
+    function fukelas(){
+        document.getElementById('namai').type = 'hidden';
+    }
+</script>
