@@ -1,4 +1,5 @@
 <?php
+
 use miloschuman\highcharts\Highcharts;
 
 $this->title = 'Dashboard|Jenis Kelas KA';
@@ -20,24 +21,33 @@ foreach($data as $value){
                     <div class="card-content">
 
                         <?php
-
-                            echo Highcharts::widget([
-                                'options' => [
-                                    'chart'=>[
-                                        'type'=>'column',
-                                        'height' => 500,
+                            if(isset($a)){
+                                
+                                echo Highcharts::widget([
+                                    'options' => [
+                                        'chart'=>[
+                                            'type'=>'column',
+                                            'height' => 500,
+                                        ],
+                                    'title' => ['text' => 'Berdasarkan Jenis Atau Kelas'],
+                                    'xAxis' => [
+                                        'categories' => ['Kereta']
                                     ],
-                                'title' => ['text' => 'Berdasarkan Jenis Atau Kelas'],
-                                'xAxis' => [
-                                    'categories' => ['Kereta']
-                                ],
-                                'yAxis' => [
-                                    'title' => ['text' => 'Keterlambatan (Menit)']
-                                ],
-                                'series' => $a
-                                ]
-                            ]);    
-                        
+                                    'yAxis' => [
+                                        'title' => ['text' => 'Keterlambatan (Menit)']
+                                    ],
+                                    'series' => $a
+                                    ]
+                                ]);    
+                            
+                            }else{
+                                ?>
+	                                <div class="alert alert-warning alert-with-icon" data-notify="container">
+                                    <i data-notify="icon" class="material-icons">add_alert</i>
+	                                <span data-notify="message">Kata Kunci yang Anda cari tidak tersedia.</span>    
+	                                </div>                                
+                                <?php
+                            }
                         ?>
                     </div>
                 </div>
