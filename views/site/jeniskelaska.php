@@ -34,9 +34,10 @@ foreach($data as $value){
                                         'categories' => ['Kereta']
                                     ],
                                     'yAxis' => [
-                                        'title' => ['text' => 'Keterlambatan (Menit)']
+                                        'title' => ['text' => 'Keterlambatan (Menit)'],
+                                        'type' =>'logarithmic'
                                     ],
-                                    'series' => $a
+                                    'series' => $a,
                                     ]
                                 ]);    
                             

@@ -14,12 +14,12 @@ $this->title = 'Dashboard|Jenis Kelas KA';
                     <div class="card-content">
                     <?php $form = ActiveForm::begin(); ?>
 
-                        <?= $form->field($model, 'nama')->textInput(['id' => 'namai', 'onclick' => 'funama()']) ?>
+                        <?= $form->field($model, 'nama')->textInput(['id' => 'namai', 'onclick' => 'funama()','onkeyup' =>'stoppedTyping()']) ?>
 
-                        <?= $form->field($model, 'id_kelas')->textInput(['id' => 'kelasi', 'onclick' => 'fukelas()']) ?>
+                        <?= $form->field($model, 'id_kelas')->textInput(['id' => 'kelasi', 'onclick' => 'fukelas()','onkeyup' =>'stoppedTyping()']) ?>
 
                         <div class="form-group">
-                            <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
+                            <?= Html::submitButton('Submit', ['id' => 'tombol','class' => 'btn btn-primary', 'disabled' => true]) ?>
                         </div>
                     <?php ActiveForm::end(); ?>
                     </div>
@@ -39,5 +39,12 @@ $this->title = 'Dashboard|Jenis Kelas KA';
     }
     function fukelas(){
         document.getElementById('namai').type = 'hidden';
+    }
+    function stoppedTyping(){
+        if(document.getElementById('namai').value.length > 0 || document.getElementById('kelasi').value.length > 0){
+            document.getElementById('tombol').disabled = false;
+        }else{
+            document.getElementById('tombol').disabled = true;
+        }
     }
 </script>

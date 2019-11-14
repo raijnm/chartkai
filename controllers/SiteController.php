@@ -136,7 +136,9 @@ class SiteController extends Controller
             $rows = (new \yii\db\Query())
             ->select(['nama', 'id_kelas','jml','no_ka'])
             ->from('v_keterlambatan')
-            ->filterWhere(['nama' => $model->nama,'id_kelas' => $model->id_kelas])
+            // ->filterWhere(['nama' => $model->nama,'id_kelas' => $model->id_kelas])
+            ->filterWhere(['like','nama',$model->nama.'%',false])
+            ->andFilterWhere(['id_kelas' => $model->id_kelas])
             ->andFilterCompare('jml', '>0')
             ->groupBy(['nama','id_kelas','jml','no_ka'])
             ->all();
