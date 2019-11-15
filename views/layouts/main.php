@@ -61,7 +61,7 @@ if (class_exists('ramosisw\CImaterial\web\MaterialAsset')) {
                     </li>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="<?php echo Url::to(['site/penyebabtelatka']); ?>">
                             <i class="material-icons">show_chart</i>
                             <p>Penyebab Keterlabatan</p>
                         </a>

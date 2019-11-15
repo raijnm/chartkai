@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\VKeterlambatan;
+use app\models\VPenyebabtelat;
 
 class SiteController extends Controller
 {
@@ -154,19 +155,30 @@ class SiteController extends Controller
 
     }
 
-    public function actionAda(){
-        $model = new VKeterlambatan();
+    public function actionPenyebabtelatka(){
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            // valid data received in $model
+        $sql = "SELECT no_ka, nama, id_kelas, m_penyebab, akibat_nama, COUNT(akibat_nama) AS jml FROM v_penyebabtelat
+                WHERE (tgl_ka ='2017-03-01') AND (nama like 'Argo wilis%')
+                GROUP BY no_ka, nama, id_kelas, m_penyebab, akibat_nama
+                ORDER BY akibat_nama";
+        $hasil = VPenyebabtelat::findBySql($sql)
+                ->asArray()
+                ->all();
 
-            // do something meaningful here about $model ...
+        return $this->render('adsa', ['dat' => $hasil]);
 
-            return $this->render('adsa', ['model' => $model]);
-        } else {
-            // either the page is initially displayed or there is some validation error
-            return $this->render('jeniskelasentry', ['model' => $model]);
-        }
+        // $model = new VKeterlambatan();
+
+        // if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        //     // valid data received in $model
+
+        //     // do something meaningful here about $model ...
+
+        //     return $this->render('adsa', ['model' => $model]);
+        // } else {
+        //     // either the page is initially displayed or there is some validation error
+        //     return $this->render('jeniskelasentry', ['model' => $model]);
+        // }
 
     }
 }
