@@ -2,7 +2,7 @@
 
 /* @var $this \yii\web\View */
 /* @var $content string */
-
+use Yii;
 use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -32,7 +32,7 @@ if (class_exists('ramosisw\CImaterial\web\MaterialAsset')) {
 <?php $this->beginBody() ?>
 
     <div class="wrapper">
-        <div class="sidebar" data-color="blue" data-image="../assets/img/sidebar-1.jpg">
+        <div class="sidebar" data-color="blue" data-image="<?=Yii::getAlias('@web'); ?>/image/tracks.jpg">
                     <!--
                         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 

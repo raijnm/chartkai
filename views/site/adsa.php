@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use miloschuman\highcharts\Highcharts;
-use miloschuman\highcharts\SeriesDataHelper;
+
 
 $pia = array();
 $isi = array_count_values(array_column($dat, 'm_penyebab'));
@@ -39,7 +39,7 @@ foreach($isia as $key => $value){
                     <div class="card-content">
 
                         <?php
-                            if(isset($cia)){
+                            if(!empty($cia)){
                                 
                                 echo Highcharts::widget([
                                     'options' => [
@@ -80,7 +80,7 @@ foreach($isia as $key => $value){
                     <div class="card-content">
 
                         <?php
-                            if(isset($pia)){
+                            if(!empty($pia)){
                                 
                                 echo Highcharts::widget([
                                     'options' => [
