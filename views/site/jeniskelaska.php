@@ -39,7 +39,7 @@ foreach($data as $value){
                                     'options' => [
                                         'chart'=>[
                                             'type'=>'column',
-                                            'height' => 500,
+                                            'height' => '70%',
                                         ],
                                     'title' => ['text' => 'Berdasarkan Jenis Atau Kelas'],
                                     'xAxis' => [

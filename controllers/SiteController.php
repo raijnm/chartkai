@@ -137,7 +137,6 @@ class SiteController extends Controller
             $rows = (new \yii\db\Query())
             ->select(['nama', 'id_kelas','jml','no_ka'])
             ->from('v_keterlambatan')
-            // ->filterWhere(['nama' => $model->nama,'id_kelas' => $model->id_kelas])
             ->filterWhere(['like','nama',$model->nama.'%',false])
             ->andFilterWhere(['id_kelas' => $model->id_kelas])
             ->andFilterCompare('jml', '>0')
@@ -157,28 +156,24 @@ class SiteController extends Controller
 
     public function actionPenyebabtelatka(){
 
-        $sql = "SELECT no_ka, nama, id_kelas, m_penyebab, akibat_nama, COUNT(akibat_nama) AS jml FROM v_penyebabtelat
-                WHERE (tgl_ka ='2017-03-01') AND (nama like 'Argo wilis%')
-                GROUP BY no_ka, nama, id_kelas, m_penyebab, akibat_nama
-                ORDER BY akibat_nama";
-        $hasil = VPenyebabtelat::findBySql($sql)
-                ->asArray()
-                ->all();
+        $model = new VPenyebabtelat();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            // valid data received in $model
 
-        return $this->render('adsa', ['dat' => $hasil]);
+            $query = VPenyebabtelat::find();
+            $hasil = $query
+                     ->filterWhere(['tgl_ka' => $model->tgl_ka])
+                     ->andFilterWhere(['like','nama',$model->nama.'%',false])
+                     ->andFilterWhere(['id_kelas' => $model->id_kelas])
+                    //  ->asArray()
+                     ->all();
 
-        // $model = new VKeterlambatan();
+            return $this->render('adsa', ['model' => $model,'dat' => $hasil]);
+        } else {
+            // either the page is initially displayed or there is some validation error
+            return $this->render('sebabentry', ['model' => $model]);
+        }
 
-        // if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-        //     // valid data received in $model
-
-        //     // do something meaningful here about $model ...
-
-        //     return $this->render('adsa', ['model' => $model]);
-        // } else {
-        //     // either the page is initially displayed or there is some validation error
-        //     return $this->render('jeniskelasentry', ['model' => $model]);
-        // }
 
     }
 }

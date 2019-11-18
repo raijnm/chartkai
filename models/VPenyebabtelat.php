@@ -34,7 +34,7 @@ class VPenyebabtelat extends \yii\db\ActiveRecord
     {
         return [
             [['id_gangguan', 'id_kelas'], 'integer'],
-            [['no_ka', 'tgl_ka', 'ket', 'm_penyebab'], 'required'],
+            // [['no_ka', 'tgl_ka', 'ket', 'm_penyebab'], 'required'],
             [['tgl_ka'], 'safe'],
             [['keterangan', 'ket', 'akibat_nama'], 'string'],
             [['nama'], 'string', 'max' => 255],
