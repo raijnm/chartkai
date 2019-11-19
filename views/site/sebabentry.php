@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-$this->title = 'Dashboard|Jenis Kelas KA';
+$this->title = 'Dashboard|Penyebab KA Telat';
 ?>
 <nav class="navbar navbar-transparent navbar-absolute">
     <div class="container-fluid">
@@ -27,17 +27,16 @@ $this->title = 'Dashboard|Jenis Kelas KA';
                     <div class="card-content">
                     <?php $form = ActiveForm::begin(); ?>
 
-                        <?= $form->field($model, 'tgl_ka')->widget(\yii\jui\DatePicker::class, [
-                            //'language' => 'ru',
-                            'dateFormat' => 'yyyy-MM-dd',
-                        ])->textInput(['class' => 'form-control']) ?>
+                        
 
-                        <?= $form->field($model, 'nama')->textInput(['id' => 'namai']) ?>
+                        <?= $form->field($model, 'tgl_ka')->input('date',$option = ['class' => 'form-control', 'autocomplete'=>"off", 'onchange' => 'cekInputValue()']) ?>
 
-                        <?= $form->field($model, 'id_kelas')->textInput(['id' => 'kelasi']) ?>
+                        <?= $form->field($model, 'nama')->textInput(['id' => 'namai', 'onchange' => 'cekInputValue()']) ?>
+
+                        <?= $form->field($model, 'id_kelas')->textInput(['id' => 'kelasi', 'onchange' => 'cekInputValue()']) ?>
 
                         <div class="form-group">
-                            <?= Html::submitButton('Submit', ['id' => 'tombol','class' => 'btn btn-primary']) ?>
+                            <?= Html::submitButton('Submit', ['id' => 'tombol','class' => 'btn btn-primary', 'disabled' => 'true']) ?>
                         </div>
                     <?php ActiveForm::end(); ?>
                     </div>
@@ -51,3 +50,17 @@ $this->title = 'Dashboard|Jenis Kelas KA';
         </div>
     </div>
 </div>
+<script>
+    function cekInputValue(){
+        let tgl = document.getElementById('vpenyebabtelat-tgl_ka').value;
+        let nama = document.getElementById('namai').value;
+        let kelas = document.getElementById('kelasi').value;
+
+        if(tgl.length > 0 || nama.length > 0 || kelas.length > 0){
+            document.getElementById("tombol").disabled = false;
+        }else{
+            document.getElementById("tombol").disabled = true;
+        }
+        
+    }
+</script>

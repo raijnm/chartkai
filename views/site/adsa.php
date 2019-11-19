@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use miloschuman\highcharts\Highcharts;
-
+$this->title = 'Dashboard|Penyebab KA Telat';
 
 $pia = array();
 $isi = array_count_values(array_column($dat, 'm_penyebab'));

@@ -41,7 +41,7 @@ foreach($data as $value){
                                             'type'=>'column',
                                             'height' => '70%',
                                         ],
-                                    'title' => ['text' => 'Berdasarkan Jenis Atau Kelas'],
+                                    'title' => ['text' => ''],
                                     'xAxis' => [
                                         'categories' => ['Kereta']
                                     ],
