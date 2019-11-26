@@ -11,6 +11,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\VKeterlambatan;
 use app\models\VPenyebabtelat;
+use miloschuman\highcharts\Highcharts;
 
 class SiteController extends Controller
 {
@@ -168,7 +169,65 @@ class SiteController extends Controller
                      ->asArray()
                      ->all();
 
-            return $this->render('adsa', ['model' => $model,'dat' => $hasil]);
+            $pia = array();
+            $isi = array_count_values(array_column($hasil, 'm_penyebab'));
+            foreach($isi as $key => $value){
+                array_push($pia,['name' => $key, 'y'=> (int)$value]);
+            }
+            $cia = array();
+            $isia = array_count_values(array_column($hasil, 'akibat_nama'));
+            foreach($isia as $key => $value){
+                array_push($cia,['name' => $key, 'y'=> (int)$value]);
+            }
+            if(!empty($pia) && !empty($cia)){
+                $charting1 = Highcharts::widget([
+                    'options' => [
+                        'title' => ['text' => ''],
+                        'plotOptions' => [
+                            'pie' => [
+                                'cursor' => 'pointer',
+                            ],
+                        ],
+                        'series' => [
+                            [ // new opening bracket
+                                'type' => 'pie',
+                                'name' => 'Elements',
+                                'data' => $cia
+                            ] // new closing bracket
+                        ],
+                    ],
+                ]);
+
+                $charting2 =  Highcharts::widget([
+                    'options' => [
+                        'title' => ['text' => ''],
+                        'plotOptions' => [
+                            'pie' => [
+                                'cursor' => 'pointer',
+                            ],
+                        ],
+                        'series' => [
+                            [ // new opening bracket
+                                'type' => 'pie',
+                                'name' => 'Elements',
+                                'data' => $pia
+                            ] // new closing bracket
+                        ],
+                    ],
+                ]); 
+            }else{
+                $charting1 = 
+                "<div class=\"alert alert-warning alert-with-icon\" data-notify=\"container\">
+                <i data-notify=\"icon\" class=\"material-icons\">add_alert</i>
+                <span data-notify=\"message\">Kata Kunci yang Anda cari tidak tersedia.</span>    
+                </div>";
+                $charting2 = 
+                "<div class=\"alert alert-warning alert-with-icon\" data-notify=\"container\">
+                <i data-notify=\"icon\" class=\"material-icons\">add_alert</i>
+                <span data-notify=\"message\">Kata Kunci yang Anda cari tidak tersedia.</span>    
+                </div>";
+            }
+            return $this->render('adsa', ['model' => $model,'charting2' => $charting2, 'charting1' => $charting1]);
         } else {
             // either the page is initially displayed or there is some validation error
             return $this->render('sebabentry', ['model' => $model]);
