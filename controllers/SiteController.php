@@ -130,7 +130,9 @@ class SiteController extends Controller
     }
 
     public function actionJeniskelaska(){
-
+        //buat model untuk table database V_keterlambatan
+        //model digunakan untuk validasi field dan transport hasil request form pada file jeniskelasentry
+        //model adalah fungsi bawaan dari yii2
         $model = new VKeterlambatan();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -175,13 +177,18 @@ class SiteController extends Controller
                     <span data-notify=\"message\">Kata Kunci yang Anda cari tidak tersedia.</span>    
                     </div>";
                 }
+            }else{
+                $charttelat = 
+                "<div class=\"alert alert-warning alert-with-icon\" data-notify=\"container\">
+                <i data-notify=\"icon\" class=\"material-icons\">add_alert</i>
+                <span data-notify=\"message\">Kata Kunci yang Anda cari tidak tersedia.</span>    
+                </div>";  
             }
 
-            // do something meaningful here about $model ...
-
+            // load view jeniskelaska dengan membawa data model dan chart yang sudah disiapkan untuk ditampilkan
             return $this->render('jeniskelaska', ['model' => $model,'charttelat' => $charttelat]);
         } else {
-            // either the page is initially displayed or there is some validation error
+            // load jeniskelasentry ketika route ke controller tanpa request post dan membawa model untuk diisi ketika submit
             return $this->render('jeniskelasentry', ['model' => $model]);
         }
         
@@ -189,7 +196,9 @@ class SiteController extends Controller
     }
 
     public function actionPenyebabtelatka(){
-
+        //buat model untuk table database V_penyebabtelat
+        //model digunakan untuk validasi field dan transport hasil request form pada file sebabentry
+        //model adalah fungsi bawaan dari yii2
         $model = new VPenyebabtelat();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             // valid data received in $model

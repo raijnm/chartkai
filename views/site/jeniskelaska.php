@@ -1,6 +1,7 @@
 <?php
-use miloschuman\highcharts\Highcharts;
 $this->title = 'Dashboard|Jenis Kelas KA';
+//view ini diload pada controller 'SiteContoller'
+//dengan fungsi actionJeniskelaska 
 ?>
 <nav class="navbar navbar-transparent navbar-absolute">
     <div class="container-fluid">
@@ -25,7 +26,7 @@ $this->title = 'Dashboard|Jenis Kelas KA';
                         <p class="category">Berdasarkan Kelas & Jenis</p>
                     </div>
                     <div class="card-content">
-                        <?php echo $charttelat; ?>
+                        <?php echo $charttelat;//chart disiapkan pada controller ?>
                     </div>
                 </div>
             </div>

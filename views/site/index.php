@@ -4,6 +4,19 @@ use yii\helpers\Html;
 
 $this->title = 'Dashboard';
 ?>
+<nav class="navbar navbar-transparent navbar-absolute">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"></a>
+        </div>
+    </div>
+</nav>
 <div class="container-fluid">
     <div class="site-index">
 
