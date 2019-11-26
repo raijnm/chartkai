@@ -144,9 +144,42 @@ class SiteController extends Controller
             ->groupBy(['nama','id_kelas','jml','no_ka'])
             ->all();
 
+            if(!empty($rows)){
+                foreach($rows as $value){
+                    $a[] = array('type' => 'column', 'name' => $value['nama'].'('.$value['no_ka'].')', 'data' => array((int)$value['jml']));
+                }
+                if(isset($a)){
+                                
+                    $charttelat = Highcharts::widget([
+                        'options' => [
+                            'chart'=>[
+                                'type'=>'column',
+                                'height' => '70%',
+                            ],
+                        'title' => ['text' => ''],
+                        'xAxis' => [
+                            'categories' => ['Kereta']
+                        ],
+                        'yAxis' => [
+                            'title' => ['text' => 'Keterlambatan (Menit)'],
+                            'type' =>'logarithmic'
+                        ],
+                        'series' => $a,
+                        ]
+                    ]);    
+                
+                }else{
+                    $charttelat = 
+                    "<div class=\"alert alert-warning alert-with-icon\" data-notify=\"container\">
+                    <i data-notify=\"icon\" class=\"material-icons\">add_alert</i>
+                    <span data-notify=\"message\">Kata Kunci yang Anda cari tidak tersedia.</span>    
+                    </div>";
+                }
+            }
+
             // do something meaningful here about $model ...
 
-            return $this->render('jeniskelaska', ['model' => $model,'data' => $rows]);
+            return $this->render('jeniskelaska', ['model' => $model,'charttelat' => $charttelat]);
         } else {
             // either the page is initially displayed or there is some validation error
             return $this->render('jeniskelasentry', ['model' => $model]);
@@ -168,16 +201,18 @@ class SiteController extends Controller
                      ->andFilterWhere(['id_kelas' => $model->id_kelas])
                      ->asArray()
                      ->all();
+            if(!empty($hasil)){
 
-            $pia = array();
-            $isi = array_count_values(array_column($hasil, 'm_penyebab'));
-            foreach($isi as $key => $value){
-                array_push($pia,['name' => $key, 'y'=> (int)$value]);
-            }
-            $cia = array();
-            $isia = array_count_values(array_column($hasil, 'akibat_nama'));
-            foreach($isia as $key => $value){
-                array_push($cia,['name' => $key, 'y'=> (int)$value]);
+                $pia = array();
+                $isi = array_count_values(array_column($hasil, 'm_penyebab'));
+                foreach($isi as $key => $value){
+                    array_push($pia,['name' => $key, 'y'=> (int)$value]);
+                }
+                $cia = array();
+                $isia = array_count_values(array_column($hasil, 'akibat_nama'));
+                foreach($isia as $key => $value){
+                    array_push($cia,['name' => $key, 'y'=> (int)$value]);
+                }
             }
             if(!empty($pia) && !empty($cia)){
                 $charting1 = Highcharts::widget([
