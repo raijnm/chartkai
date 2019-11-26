@@ -165,7 +165,7 @@ class SiteController extends Controller
                      ->filterWhere(['tgl_ka' => $model->tgl_ka])
                      ->andFilterWhere(['like','nama',$model->nama.'%',false])
                      ->andFilterWhere(['id_kelas' => $model->id_kelas])
-                    //  ->asArray()
+                     ->asArray()
                      ->all();
 
             return $this->render('adsa', ['model' => $model,'dat' => $hasil]);
