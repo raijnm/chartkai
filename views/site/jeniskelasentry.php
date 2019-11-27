@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
 $this->title = 'Dashboard|Jenis Kelas KA';
 ?>
 <nav class="navbar navbar-transparent navbar-absolute">
@@ -26,13 +27,24 @@ $this->title = 'Dashboard|Jenis Kelas KA';
                     </div>
                     <div class="card-content">
                     <?php $form = ActiveForm::begin(); ?>
-
-                        <?= $form->field($model, 'nama')->textInput(['id' => 'namai', 'onclick' => 'funama()','onkeyup' =>'stoppedTyping()']) ?>
-
-                        <?= $form->field($model, 'id_kelas')->textInput(['id' => 'kelasi', 'onclick' => 'fukelas()','onkeyup' =>'stoppedTyping()']) ?>
-
+                        <?= $form->field($model, 'nama')->widget(Select2::classname(), [
+                            'data' => $nama,
+                            'language' => 'en',
+                            'options' => ['placeholder' => 'Select a state ...'],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ]) ?>
+                        <?= $form->field($model, 'id_kelas')->widget(Select2::classname(), [
+                            'data' => $kelas,
+                            'language' => 'en',
+                            'options' => ['placeholder' => 'Select a state ...'],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ]) ?>
                         <div class="form-group">
-                            <?= Html::submitButton('Submit', ['id' => 'tombol','class' => 'btn btn-primary', 'disabled' => true]) ?>
+                            <?= Html::submitButton('Submit', ['id' => 'tombol','class' => 'btn btn-primary', 'disabled' => false]) ?>
                         </div>
                     <?php ActiveForm::end(); ?>
                     </div>

@@ -12,6 +12,7 @@ use app\models\ContactForm;
 use app\models\VKeterlambatan;
 use app\models\VPenyebabtelat;
 use miloschuman\highcharts\Highcharts;
+use yii\helpers\ArrayHelper;
 
 class SiteController extends Controller
 {
@@ -189,7 +190,14 @@ class SiteController extends Controller
             return $this->render('jeniskelaska', ['model' => $model,'charttelat' => $charttelat]);
         } else {
             // load jeniskelasentry ketika route ke controller tanpa request post dan membawa model untuk diisi ketika submit
-            return $this->render('jeniskelasentry', ['model' => $model]);
+            $rnama = (new \yii\db\Query())
+            ->select(['nama','id_kelas'])
+            ->distinct()
+            ->from('relasi_ka')
+            ->all();
+            $nama =ArrayHelper::map($rnama, 'nama', 'nama');
+            $kelas =ArrayHelper::map($rnama, 'id_kelas', 'id_kelas');
+            return $this->render('jeniskelasentry', ['model' => $model,'nama' => $nama,'kelas' => $kelas]);
         }
         
 
@@ -274,7 +282,14 @@ class SiteController extends Controller
             return $this->render('adsa', ['model' => $model,'charting2' => $charting2, 'charting1' => $charting1]);
         } else {
             // either the page is initially displayed or there is some validation error
-            return $this->render('sebabentry', ['model' => $model]);
+            $rnama = (new \yii\db\Query())
+            ->select(['nama','id_kelas'])
+            ->distinct()
+            ->from('relasi_ka')
+            ->all();
+            $nama =ArrayHelper::map($rnama, 'nama', 'nama');
+            $kelas =ArrayHelper::map($rnama, 'id_kelas', 'id_kelas');
+            return $this->render('sebabentry', ['model' => $model,'nama' => $nama,'kelas' => $kelas]);
         }
 
 
