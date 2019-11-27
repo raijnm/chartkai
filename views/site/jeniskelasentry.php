@@ -30,7 +30,7 @@ $this->title = 'Dashboard|Jenis Kelas KA';
                         <?= $form->field($model, 'nama')->widget(Select2::classname(), [
                             'data' => $nama,
                             'language' => 'en',
-                            'options' => ['placeholder' => 'Select a state ...'],
+                            'options' => ['placeholder' => 'Select a state ...', 'onchange' => 'stoppedTyping()'],
                             'pluginOptions' => [
                                 'allowClear' => true
                             ],
@@ -38,13 +38,13 @@ $this->title = 'Dashboard|Jenis Kelas KA';
                         <?= $form->field($model, 'id_kelas')->widget(Select2::classname(), [
                             'data' => $kelas,
                             'language' => 'en',
-                            'options' => ['placeholder' => 'Select a state ...'],
+                            'options' => ['placeholder' => 'Select a state ...', 'onchange' => 'stoppedTyping()'],
                             'pluginOptions' => [
                                 'allowClear' => true
                             ],
                         ]) ?>
                         <div class="form-group">
-                            <?= Html::submitButton('Submit', ['id' => 'tombol','class' => 'btn btn-primary', 'disabled' => false]) ?>
+                            <?= Html::submitButton('Submit', ['id' => 'tombol','class' => 'btn btn-primary', 'disabled' => true]) ?>
                         </div>
                     <?php ActiveForm::end(); ?>
                     </div>
@@ -59,14 +59,8 @@ $this->title = 'Dashboard|Jenis Kelas KA';
     </div>
 </div>
 <script>
-    function funama(){
-        document.getElementById('kelasi').type = 'hidden';
-    }
-    function fukelas(){
-        document.getElementById('namai').type = 'hidden';
-    }
     function stoppedTyping(){
-        if(document.getElementById('namai').value.length > 0 || document.getElementById('kelasi').value.length > 0){
+        if(document.getElementById('vketerlambatan-nama').value.length > 0 || document.getElementById('vketerlambatan-id_kelas').value.length > 0){
             document.getElementById('tombol').disabled = false;
         }else{
             document.getElementById('tombol').disabled = true;

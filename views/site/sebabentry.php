@@ -34,7 +34,7 @@ $this->title = 'Dashboard|Penyebab KA Telat';
                         <?= $form->field($model, 'nama')->widget(Select2::classname(), [
                             'data' => $nama,
                             'language' => 'en',
-                            'options' => ['placeholder' => 'Select a state ...'],
+                            'options' => ['placeholder' => 'Select a state ...', 'onchange' => 'cekInputValue()'],
                             'pluginOptions' => [
                                 'allowClear' => true
                             ],
@@ -42,14 +42,14 @@ $this->title = 'Dashboard|Penyebab KA Telat';
                         <?= $form->field($model, 'id_kelas')->widget(Select2::classname(), [
                             'data' => $kelas,
                             'language' => 'en',
-                            'options' => ['placeholder' => 'Select a state ...'],
+                            'options' => ['placeholder' => 'Select a state ...', 'onchange' => 'cekInputValue()'],
                             'pluginOptions' => [
                                 'allowClear' => true
                             ],
                         ]) ?>
 
                         <div class="form-group">
-                            <?= Html::submitButton('Submit', ['id' => 'tombol','class' => 'btn btn-primary', 'disabled' => false]) ?>
+                            <?= Html::submitButton('Submit', ['id' => 'tombol','class' => 'btn btn-primary', 'disabled' => true]) ?>
                         </div>
                     <?php ActiveForm::end(); ?>
                     </div>
@@ -64,16 +64,16 @@ $this->title = 'Dashboard|Penyebab KA Telat';
     </div>
 </div>
 <script>
-    // function cekInputValue(){
-    //     let tgl = document.getElementById('vpenyebabtelat-tgl_ka').value;
-    //     let nama = document.getElementById('namai').value;
-    //     let kelas = document.getElementById('kelasi').value;
+    function cekInputValue(){
+        let tgl = document.getElementById('vpenyebabtelat-tgl_ka').value;
+        let nama = document.getElementById('vpenyebabtelat-nama').value;
+        let kelas = document.getElementById('vpenyebabtelat-id_kelas').value;
 
-    //     if(tgl.length > 0 || nama.length > 0 || kelas.length > 0){
-    //         document.getElementById("tombol").disabled = false;
-    //     }else{
-    //         document.getElementById("tombol").disabled = true;
-    //     }
+        if(tgl.length > 0 || nama.length > 0 || kelas.length > 0){
+            document.getElementById("tombol").disabled = false;
+        }else{
+            document.getElementById("tombol").disabled = true;
+        }
         
-    // }
+    }
 </script>
