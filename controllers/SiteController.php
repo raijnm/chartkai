@@ -65,7 +65,51 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $command = Yii::$app->db->createCommand("SELECT daop AS name,SUM(daop) AS data FROM gangguan GROUP BY daop");
+        $sum = $command->queryAll();
+        foreach($sum as $value){
+            $a[] = array('type' => 'column', 'name' => 'Daop/Divre '.$value['name'], 'data' => array((int)$value['data']));
+        }
+        $command2 = Yii::$app->db->createCommand("SELECT relasi_ka.nama AS nama ,gangguan.no_ka AS no_ka, COUNT(*) AS num from gangguan, relasi_ka WHERE  relasi_ka.no_ka = gangguan.no_ka GROUP BY no_ka, nama ORDER BY num DESC LIMIT 15");
+        $sum2 = $command2->queryAll();
+        foreach($sum2 as $value){
+            $b[] = array('type' => 'column', 'name' => $value['nama'].'('.$value['no_ka'].')', 'data' => array((int)$value['num']));
+        }
+        $chartsumlap = Highcharts::widget([
+            'options' => [
+                'chart'=>[
+                    'type'=>'column',
+                    'height' => '70%',
+                ],
+            'title' => ['text' => ''],
+            'xAxis' => [
+                'categories' => ['Daop/Divre']
+            ],
+            'yAxis' => [
+                'title' => ['text' => 'Jumlah Laporan'],
+                'type' =>'logarithmic'
+            ],
+            'series' => $a,
+            ]
+        ]); 
+        $chartsumka = Highcharts::widget([
+            'options' => [
+                'chart'=>[
+                    'type'=>'column',
+                    'height' => '70%',
+                ],
+            'title' => ['text' => ''],
+            'xAxis' => [
+                'categories' => ['Kereta']
+            ],
+            'yAxis' => [
+                'title' => ['text' => 'Jumlah Laporan'],
+                'type' =>'logarithmic'
+            ],
+            'series' => $b,
+            ]
+        ]); 
+        return $this->render('index',['data'=>$b,'chart'=>$chartsumlap,'chart2'=>$chartsumka]);
     }
 
     /**

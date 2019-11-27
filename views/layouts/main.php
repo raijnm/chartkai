@@ -33,13 +33,8 @@ if (class_exists('ramosisw\CImaterial\web\MaterialAsset')) {
 
     <div class="wrapper">
         <div class="sidebar" data-color="blue" data-image="">
-                    <!--
-                        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
-                        Tip 2: you can also add an image using data-image tag
-                    -->
-
-            <div class="logo" data-image="https://kai.id/static/konten/logokai_main.png">
+            <div class="logo">
                 <a href="<?php echo Url::to(['site/index']); ?>" class="simple-text">
                     Kereta Api Indonesia
                 </a>
@@ -63,7 +58,7 @@ if (class_exists('ramosisw\CImaterial\web\MaterialAsset')) {
                     <li>
                         <a href="<?php echo Url::to(['site/penyebabtelatka']); ?>">
                             <i class="material-icons">show_chart</i>
-                            <p>Penyebab Keterlabatan</p>
+                            <p>Penyebab Keterlambatan</p>
                         </a>
                     </li>
                 </ul>
