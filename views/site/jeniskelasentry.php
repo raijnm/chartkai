@@ -30,7 +30,7 @@ $this->title = 'Dashboard|Jenis Kelas KA';
                         <?= $form->field($model, 'nama')->widget(Select2::classname(), [
                             'data' => $nama,
                             'language' => 'en',
-                            'options' => ['placeholder' => 'Select a state ...', 'onchange' => 'stoppedTyping()'],
+                            'options' => ['placeholder' => 'Pilih Nama KA', 'onchange' => 'stoppedTyping()'],
                             'pluginOptions' => [
                                 'allowClear' => true
                             ],
@@ -38,7 +38,7 @@ $this->title = 'Dashboard|Jenis Kelas KA';
                         <?= $form->field($model, 'id_kelas')->widget(Select2::classname(), [
                             'data' => $kelas,
                             'language' => 'en',
-                            'options' => ['placeholder' => 'Select a state ...', 'onchange' => 'stoppedTyping()'],
+                            'options' => ['placeholder' => 'Pilih Kelas KA', 'onchange' => 'stoppedTyping()'],
                             'pluginOptions' => [
                                 'allowClear' => true
                             ],
