@@ -201,7 +201,7 @@ class SiteController extends Controller
                         'options' => [
                             'chart'=>[
                                 'type'=>'column',
-                                'height' => '70%',
+                                'height' => '50%',
                             ],
                         'title' => ['text' => ''],
                         'xAxis' => [

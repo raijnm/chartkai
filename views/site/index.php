@@ -27,8 +27,7 @@ $this->title = 'Dashboard';
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header" data-background-color="blue">
-                        <h4 class="title"><i class="material-icons">double_arrow</i>Jumlah Laporan Gangguan Per-Daop/Divre</h4>
-                        <!-- <p class="category">Berdasarkan Kelas & Jenis</p> -->
+                        <h4 class="title"><i class="material-icons">double_arrow</i>Jumlah Gangguan Per-Daop/Divre</h4>
                     </div>
                     <div class="card-content">
                         <?php echo $chart; ?>
@@ -38,8 +37,7 @@ $this->title = 'Dashboard';
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header" data-background-color="blue">
-                        <h4 class="title"><i class="material-icons">double_arrow</i>Top 15 Jumlah Laporan Ganguan Per-KA</h4>
-                        <!-- <p class="category">Berdasarkan Kelas & Jenis</p> -->
+                        <h4 class="title"><i class="material-icons">double_arrow</i>Top 15 Jumlah Ganguan Per-KA</h4>
                     </div>
                     <div class="card-content">
                         <?php echo $chart2 ;?>
